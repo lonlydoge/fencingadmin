@@ -1,0 +1,214 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Commands = {}
+local function RemoveSpaces(String)
+	return String:gsub("%s+", "") or String
+end
+ 
+local function FindPlayer(String)
+	String = RemoveSpaces(String)
+	for _, _Player in pairs(Players:GetPlayers()) do
+		if _Player.Name:lower():match('^'.. String:lower()) then
+			return _Player
+		end
+	end
+	return nil
+end
+function killall()
+function toolgrip(tool,p,postion)
+while LocalPlayer.Character.Humanoid:GetState() ~= Enum.HumanoidStateType.Dead do
+game:GetService("RunService").Heartbeat:Wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = postion
+if tool.Parent ~= p.Parent then
+local Arm = game.Players.LocalPlayer.Character["Right Arm"].CFrame * CFrame.new(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, -1, 0)
+tool.Grip = Arm:ToObjectSpace(p.CFrame):Inverse()
+end
+end
+end
+local spray = game:GetService("Workspace").Handle
+spray.CanCollide = false
+function getRoot(char)
+	local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
+	return rootPart
+end
+pos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(math.random(1,50),0,math.random(1,50))
+game.Players.LocalPlayer.Character:ClearAllChildren()
+repeat wait() until game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+for i = 1,8 do
+repeat wait() 
+spray.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+until game.Players.LocalPlayer.Character:FindFirstChild("Spray")
+game.Players.LocalPlayer.Character:FindFirstChild("Spray").Handle.CanCollide = false
+game.Players.LocalPlayer.Character:FindFirstChild("Spray").Parent = workspace
+end
+spray.CFrame = CFrame.new(0,50,0)
+for i,v in pairs(workspace:GetChildren()) do
+if v:IsA("Tool") then
+game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+end
+end
+repeat wait() until game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
+game.Players.LocalPlayer.Character.Humanoid:UnequipTools()
+game.Players.LocalPlayer.Character.Humanoid:Destroy()
+Instance.new("Humanoid",game.Players.LocalPlayer.Character)
+ae = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+for _,v in pairs(game:GetService("Players"):GetPlayers()) do
+if v ~= game.Players.LocalPlayer then
+if v.Character:FindFirstChildWhichIsA("Humanoid") then
+if v.Character.Humanoid.Sit == false then
+local plrroot = getRoot(v.Character)
+local tool = game.Players.LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
+tool.Parent = game.Players.LocalPlayer.Character
+wait()
+spawn(function() toolgrip(tool,plrroot,ae) end)
+end
+end
+end
+end
+wait(.2)
+game.Players.LocalPlayer.Character.Humanoid.Health = 0
+game.Players.LocalPlayer.Character = nil
+end
+function kill(Player)
+pos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame 
+game.Players.LocalPlayer.Character:BreakJoints()
+repeat wait() until game.Players.LocalPlayer.Character:WaitForChild("Humanoid"):GetState() ~= Enum.HumanoidStateType.Dead
+repeat wait() until game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+game.Players.LocalPlayer.Character.Humanoid:Remove()
+Instance.new("Humanoid",game.Players.LocalPlayer.Character)
+local tool = game.Players.LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
+if tool then
+tool.Parent = game.Players.LocalPlayer.Character
+repeat game:GetService("RunService").Heartbeat:wait()
+local Arm = game.Players.LocalPlayer.Character["Right Arm"].CFrame * CFrame.new(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, -1, 0)
+tool.Grip = Arm:ToObjectSpace(Player.Character.HumanoidRootPart.CFrame):Inverse()
+until tool.Parent == Player.Character
+game.Players.LocalPlayer.Character.Humanoid.Health = 0
+game.Players.LocalPlayer.Character = nil
+end
+end
+function bring(Player)
+pos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame 
+game.Players.LocalPlayer.Character:ClearAllChildren()
+repeat wait() until game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+game.Players.LocalPlayer.Character.Humanoid:Remove()
+Instance.new("Humanoid",game.Players.LocalPlayer.Character)
+local tool = game.Players.LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
+if tool then
+tool.Parent = game.Players.LocalPlayer.Character
+repeat game:GetService("RunService").Heartbeat:wait()
+Player.Character.HumanoidRootPart.CFrame = tool.Handle.CFrame
+until tool.Parent == Player.Character
+game.Players.LocalPlayer.Character:ClearAllChildren()
+end
+end
+function attach(Player)
+pos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame 
+game.Players.LocalPlayer.Character:ClearAllChildren()
+repeat wait() until game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+game.Players.LocalPlayer.Character.Humanoid:Remove()
+Instance.new("Humanoid",game.Players.LocalPlayer.Character)
+local tool = game.Players.LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
+if tool then
+tool.Parent = game.Players.LocalPlayer.Character
+repeat game:GetService("RunService").Heartbeat:wait()
+Player.Character.HumanoidRootPart.CFrame = tool.Handle.CFrame
+until tool.Parent == Player.Character
+end
+end
+function gripattach(Player)
+pos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame 
+game.Players.LocalPlayer.Character:ClearAllChildren()
+repeat wait() until game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+game.Players.LocalPlayer.Character.Humanoid:Remove()
+Instance.new("Humanoid",game.Players.LocalPlayer.Character)
+local tool = game.Players.LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
+if tool then
+tool.Parent = game.Players.LocalPlayer.Character
+repeat game:GetService("RunService").Heartbeat:wait()
+local Arm = LocalPlayer.Character["Right Arm"].CFrame
+tool.Grip = Arm:ToObjectSpace(Player.Character.HumanoidRootPart.CFrame):Inverse()
+until tool.Parent == Player.Character
+end
+end
+function bringall()
+function toolgrip(tool,p,postion)
+while LocalPlayer.Character.Humanoid:GetState() ~= Enum.HumanoidStateType.Dead do
+game:GetService("RunService").Heartbeat:Wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = postion
+if tool.Parent ~= p.Parent then
+local Arm = game.Players.LocalPlayer.Character["Right Arm"].CFrame * CFrame.new(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, -1, 0)
+tool.Grip = Arm:ToObjectSpace(p.CFrame):Inverse()
+end
+end
+end
+local spray = game:GetService("Workspace").Handle
+spray.CanCollide = false
+function getRoot(char)
+	local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
+	return rootPart
+end
+pos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+game.Players.LocalPlayer.Character:ClearAllChildren()
+repeat wait() until game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+for i = 1,8 do
+repeat wait() 
+spray.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+until game.Players.LocalPlayer.Character:FindFirstChild("Spray")
+game.Players.LocalPlayer.Character:FindFirstChild("Spray").Handle.CanCollide = false
+game.Players.LocalPlayer.Character:FindFirstChild("Spray").Parent = workspace
+end
+spray.CFrame = CFrame.new(0,50,0)
+for i,v in pairs(workspace:GetChildren()) do
+if v:IsA("Tool") then
+game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+end
+end
+repeat wait() until game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
+game.Players.LocalPlayer.Character.Humanoid:UnequipTools()
+game.Players.LocalPlayer.Character.Humanoid:Destroy()
+Instance.new("Humanoid",game.Players.LocalPlayer.Character)
+ae = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+for _,v in pairs(game:GetService("Players"):GetPlayers()) do
+if v ~= game.Players.LocalPlayer then
+if v.Character:FindFirstChildWhichIsA("Humanoid") then
+if v.Character.Humanoid.Sit == false then
+local plrroot = getRoot(v.Character)
+local tool = game.Players.LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
+tool.Parent = game.Players.LocalPlayer.Character
+wait()
+spawn(function() toolgrip(tool,plrroot,ae) end)
+end
+end
+end
+end
+wait(.3)
+game.Players.LocalPlayer.Character:ClearAllChildren()
+end
+game.Players.LocalPlayer.Chatted:Connect(function(e)
+e = e:lower()
+e = e:split(" ")
+if e[1] == "~kill" then
+plr = FindPlayer(e[2])
+kill(plr)
+elseif e[1] == "~killall" then
+killall()
+elseif e[1] == "~antiattach" then
+game.Players.LocalPlayer.Character["Right Arm"]:BreakJoints()   
+elseif e[1] == "~bring" then
+bring(FindPlayer(e[2]))
+elseif e[1] == "~attach" then
+attach(FindPlayer(e[2]))
+elseif e[1] == "~gattach" then
+gripattach(FindPlayer(e[2]))
+elseif e[1] == "~bringall" then
+bringall()
+end
+end)
+
